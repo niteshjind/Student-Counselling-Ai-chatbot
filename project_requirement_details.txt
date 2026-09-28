@@ -1,0 +1,906 @@
+============================================================
+PRODUCT REQUIREMENTS DOCUMENT (PRD)
+============================================================
+
+Project Name:
+Student Counselling AI Chatbot
+
+Project Type:
+B.Tech 3rd Year Minor Project
+
+Domain:
+Artificial Intelligence / Generative AI / RAG / Web Development
+
+Version:
+1.0
+
+Status:
+Development
+
+============================================================
+1. PROJECT OVERVIEW
+============================================================
+
+Student Counselling AI Chatbot is an AI-powered web-based
+student counselling assistant designed to answer academic,
+course, admission, eligibility, fees, and other university-
+related queries.
+
+The system will use Retrieval-Augmented Generation (RAG)
+instead of a traditional rule-based or keyword-matching
+chatbot.
+
+The chatbot will retrieve relevant information from the
+university's knowledge base and provide the retrieved context
+to a Large Language Model (LLM). The LLM will generate a
+natural-language response based on the retrieved information.
+
+The initial version will run as an independent web application
+that simulates the chatbot experience of a university portal.
+
+The architecture must be designed so that the chatbot can
+later be embedded into the actual university website as a
+floating popup/chat widget after receiving the required
+permission and integration access.
+
+============================================================
+2. PROBLEM STATEMENT
+============================================================
+
+Students frequently need information regarding:
+
+- Available courses
+- Course duration
+- Eligibility criteria
+- Admission process
+- Fees
+- Academic information
+- University-related information
+- Counselling-related queries
+
+Traditional FAQ or rule-based chatbots depend on predefined
+keywords and fixed responses. Such systems have limited
+understanding of natural-language questions and require manual
+creation of many question-answer pairs.
+
+The proposed system will use RAG to allow students to ask
+questions naturally while keeping responses grounded in the
+available university knowledge base.
+
+============================================================
+3. PROJECT OBJECTIVES
+============================================================
+
+The primary objectives are:
+
+1. Build an AI-powered student counselling chatbot.
+2. Implement a Retrieval-Augmented Generation pipeline.
+3. Use university-specific data as the chatbot's knowledge base.
+4. Support natural-language student queries.
+5. Retrieve relevant information before generating answers.
+6. Reduce hallucinated or unsupported responses.
+7. Provide a modern and responsive chat interface.
+8. Display the chatbot as a floating popup/widget.
+9. Make the chatbot architecture suitable for future university
+   website integration.
+10. Provide a maintainable and extensible codebase.
+11. Provide source/context information where appropriate.
+12. Allow future expansion of the knowledge base.
+
+============================================================
+4. TARGET USERS
+============================================================
+
+Primary Users:
+- Prospective students
+- Existing students
+- Students seeking academic information
+- Students seeking admission information
+
+Secondary Users:
+- University counselling/admission staff
+- Project administrators
+
+============================================================
+5. CORE FEATURES
+============================================================
+
+5.1 AI CHAT INTERFACE
+
+The system shall provide a web-based conversational interface.
+
+The interface shall include:
+
+- Floating chatbot button
+- Popup chat window
+- Chat header
+- User messages
+- AI messages
+- Text input
+- Send button
+- Loading/typing indicator
+- Suggested questions
+- Clear conversation option
+
+------------------------------------------------------------
+
+5.2 NATURAL LANGUAGE QUERYING
+
+Students shall be able to ask questions using normal language.
+
+Examples:
+
+"What courses are available?"
+
+"What is the eligibility for B.Tech AI and ML?"
+
+"How long is the B.Tech program?"
+
+"What are the admission requirements?"
+
+"What is the fee structure?"
+
+The system should not require exact keywords or predefined
+question formats.
+
+------------------------------------------------------------
+
+5.3 RAG-BASED RESPONSE GENERATION
+
+The chatbot shall use Retrieval-Augmented Generation.
+
+The basic flow shall be:
+
+User Question
+      |
+      v
+Query Processing
+      |
+      v
+Embedding Generation
+      |
+      v
+Vector Database Search
+      |
+      v
+Relevant University Information
+      |
+      v
+Context + User Question
+      |
+      v
+Large Language Model
+      |
+      v
+Final Answer
+
+The LLM must use retrieved university information as the
+primary source for answering university-related questions.
+
+------------------------------------------------------------
+
+5.4 UNIVERSITY KNOWLEDGE BASE
+
+The initial knowledge base shall use the available university
+data provided for the project.
+
+Expected sources include:
+
+- Courses CSV file
+- University information document
+- Additional approved university documents in future
+
+The system shall support adding additional documents in future.
+
+------------------------------------------------------------
+
+5.5 CSV DATA PROCESSING
+
+The courses CSV file shall be processed before being added to
+the vector database.
+
+Processing steps:
+
+CSV
+ |
+ v
+Data Loading
+ |
+ v
+Data Cleaning
+ |
+ v
+Data Validation
+ |
+ v
+Document Conversion
+ |
+ v
+Chunking
+ |
+ v
+Embedding Generation
+ |
+ v
+Vector Database
+
+The system should preserve important course information such
+as course name, eligibility, duration, fees, admission details,
+and other available fields.
+
+------------------------------------------------------------
+
+5.6 DOCUMENT PROCESSING
+
+The provided university document shall be processed and
+converted into searchable text.
+
+Processing steps:
+
+Document
+ |
+ v
+Text Extraction
+ |
+ v
+Cleaning
+ |
+ v
+Chunking
+ |
+ v
+Embedding Generation
+ |
+ v
+Vector Database
+
+The system should support common document formats where
+practical, with PDF/DOCX support as an extensible capability.
+
+------------------------------------------------------------
+
+5.7 VECTOR DATABASE
+
+A vector database shall store embeddings of the processed
+knowledge-base content.
+
+Initial vector database:
+
+ChromaDB
+
+The vector database shall support semantic similarity search.
+
+The system should retrieve the most relevant chunks for a
+student's query.
+
+------------------------------------------------------------
+
+5.8 LARGE LANGUAGE MODEL
+
+The system shall use an LLM for natural-language response
+generation.
+
+The initial implementation may use:
+
+Ollama + Llama
+
+The LLM layer should be implemented in a modular way so that
+the model can be replaced with another supported LLM/API in
+the future without redesigning the complete application.
+
+------------------------------------------------------------
+
+5.9 GROUNDED RESPONSE SYSTEM
+
+The chatbot must follow these principles:
+
+- Prefer retrieved university information.
+- Do not invent university-specific information.
+- Do not confidently answer unsupported university questions.
+- If required information is unavailable, clearly inform the
+  student.
+- Avoid presenting assumptions as official university facts.
+
+Example fallback response:
+
+"I couldn't find reliable information about this in the
+available university knowledge base. Please contact the
+appropriate university department or counsellor for the latest
+information."
+
+------------------------------------------------------------
+
+5.10 SOURCE INFORMATION
+
+Where technically possible, the chatbot should identify the
+document or knowledge-base source used for the response.
+
+Example:
+
+Source:
+Course Information
+
+or
+
+Source:
+University Admission Document
+
+This feature is intended to improve transparency and trust.
+
+============================================================
+6. CHATBOT SCOPE
+============================================================
+
+The chatbot's primary scope is university-related information.
+
+IN-SCOPE:
+
+- Courses
+- Course details
+- Eligibility
+- Duration
+- Fees
+- Admission information
+- Academic information available in the knowledge base
+- General counselling-related university queries
+
+OUT-OF-SCOPE:
+
+- General internet search
+- Weather
+- Entertainment
+- Personal medical advice
+- Financial advice
+- Unrelated general questions
+- Unsupported university information
+
+For unsupported questions, the chatbot should politely explain
+that the requested information is outside its available
+knowledge base or scope.
+
+============================================================
+7. FRONTEND REQUIREMENTS
+============================================================
+
+Frontend Technology:
+
+- React.js
+- Tailwind CSS
+- JavaScript
+
+The frontend should be responsive and work on:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+Main UI components:
+
+- FloatingButton
+- Chatbot
+- ChatHeader
+- ChatMessage
+- ChatInput
+- SuggestedQuestions
+- TypingIndicator
+
+The UI should have a professional university-assistant
+appearance.
+
+The chatbot should resemble a real website support/counselling
+widget rather than a basic chatbot demo.
+
+============================================================
+8. BACKEND REQUIREMENTS
+============================================================
+
+Backend Technology:
+
+Python
+FastAPI
+
+The backend shall expose REST APIs for:
+
+- Sending chat messages
+- Receiving AI responses
+- Health/status checking
+- Knowledge-base/document management
+- Future conversation history
+- Future feedback collection
+
+Basic request flow:
+
+Frontend
+   |
+   v
+FastAPI
+   |
+   v
+Chat Service
+   |
+   v
+RAG Pipeline
+   |
+   v
+Retriever
+   |
+   v
+LLM
+   |
+   v
+Response
+   |
+   v
+Frontend
+
+============================================================
+9. RAG PIPELINE REQUIREMENTS
+============================================================
+
+The RAG system shall contain the following logical components:
+
+1. Data Loader
+2. Data Cleaner
+3. Document Converter
+4. Text Chunker
+5. Embedding Generator
+6. Vector Store
+7. Retriever
+8. Context Builder
+9. Prompt Template
+10. LLM
+11. Response Generator
+
+Expected pipeline:
+
+DATA SOURCES
+     |
+     v
+LOAD
+     |
+     v
+CLEAN
+     |
+     v
+CHUNK
+     |
+     v
+EMBED
+     |
+     v
+CHROMADB
+     |
+     v
+RETRIEVAL
+     |
+     v
+CONTEXT
+     |
+     v
+PROMPT
+     |
+     v
+LLM
+     |
+     v
+ANSWER
+
+============================================================
+10. PROMPT REQUIREMENTS
+============================================================
+
+The system prompt for the LLM should establish that the model
+is a university student counselling assistant.
+
+The LLM should:
+
+- Answer clearly.
+- Use retrieved context.
+- Avoid unsupported claims.
+- Avoid hallucinating university information.
+- Admit when information is unavailable.
+- Maintain a professional and helpful tone.
+- Answer in the language/style appropriate to the user's query
+  where supported.
+
+The prompt should clearly distinguish between retrieved
+knowledge and unsupported information.
+
+============================================================
+11. DATABASE REQUIREMENTS
+============================================================
+
+Application Database:
+
+Initial:
+SQLite
+
+Potential future:
+PostgreSQL
+
+The application database may store:
+
+- Conversation sessions
+- Messages
+- User information (if authentication is introduced)
+- Feedback
+- Chat analytics
+
+The vector database and application database are separate.
+
+Vector Database:
+ChromaDB
+
+Application Database:
+SQLite initially
+
+============================================================
+12. ADMIN FEATURES
+============================================================
+
+Admin functionality is an advanced/future feature but should
+be considered in the architecture.
+
+Potential admin features:
+
+- Admin login
+- Upload documents
+- Upload/update course CSV
+- View knowledge-base files
+- Rebuild/update vector database
+- View user queries
+- View feedback
+- View basic chatbot analytics
+
+If time is limited, document/CSV upload and vector database
+update will have priority over advanced analytics.
+
+============================================================
+13. EMBEDDABLE CHATBOT WIDGET
+============================================================
+
+The chatbot shall be designed as a floating widget.
+
+Expected user experience:
+
+University Website
+        |
+        |
+        |                         [Chatbot Icon]
+        |                               |
+        |                               v
+        |                      Popup Chat Window
+        |
+        |
+
+The initial project will run on a separate demo website.
+
+Actual university portal integration is outside the current
+deployment scope because access/permission to modify the
+university website is not currently available.
+
+The frontend architecture should make future integration
+possible through an embeddable widget/script or equivalent
+integration mechanism.
+
+============================================================
+14. SECURITY REQUIREMENTS
+============================================================
+
+The system should:
+
+- Never expose API keys in frontend code.
+- Store secrets in environment variables.
+- Validate backend requests.
+- Restrict administrative functionality.
+- Avoid storing unnecessary sensitive user information.
+- Implement basic CORS configuration.
+- Sanitize uploaded files where applicable.
+- Validate file types and sizes.
+- Handle errors without exposing internal implementation
+  details.
+
+============================================================
+15. ERROR HANDLING
+============================================================
+
+The system should handle:
+
+- Empty user messages
+- Invalid requests
+- Backend unavailable
+- LLM unavailable
+- Vector database unavailable
+- Invalid document uploads
+- Unsupported file formats
+- Retrieval failure
+- Missing information
+- Timeout errors
+
+The chatbot should show user-friendly error messages.
+
+============================================================
+16. PERFORMANCE REQUIREMENTS
+============================================================
+
+The chatbot should provide responses within a reasonable
+response time under normal local/demo conditions.
+
+The system should:
+
+- Avoid unnecessarily large context windows.
+- Retrieve only relevant document chunks.
+- Use appropriate chunk sizes.
+- Limit the number of retrieved results.
+- Avoid repeated unnecessary embedding operations.
+- Load the vector database efficiently.
+
+============================================================
+17. PROJECT FILE STRUCTURE
+============================================================
+
+student-counselling-ai/
+|
+├── frontend/
+│   ├── public/
+│   │   └── chatbot-icon.png
+│   │
+│   └── src/
+│       ├── assets/
+│       ├── components/
+│       │   ├── Chatbot.jsx
+│       │   ├── ChatHeader.jsx
+│       │   ├── ChatMessage.jsx
+│       │   ├── ChatInput.jsx
+│       │   ├── SuggestedQuestions.jsx
+│       │   ├── TypingIndicator.jsx
+│       │   └── FloatingButton.jsx
+│       │
+│       ├── pages/
+│       │   └── Home.jsx
+│       │
+│       ├── services/
+│       │   └── api.js
+│       │
+│       ├── App.jsx
+│       ├── main.jsx
+│       └── index.css
+│
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   │
+│   │   ├── api/
+│   │   │   ├── chat.py
+│   │   │   ├── documents.py
+│   │   │   └── health.py
+│   │   │
+│   │   ├── rag/
+│   │   │   ├── loader.py
+│   │   │   ├── cleaner.py
+│   │   │   ├── chunker.py
+│   │   │   ├── embeddings.py
+│   │   │   ├── vector_store.py
+│   │   │   ├── retriever.py
+│   │   │   └── pipeline.py
+│   │   │
+│   │   ├── llm/
+│   │   │   ├── model.py
+│   │   │   └── prompts.py
+│   │   │
+│   │   ├── database/
+│   │   │   ├── database.py
+│   │   │   ├── models.py
+│   │   │   └── crud.py
+│   │   │
+│   │   ├── services/
+│   │   │   ├── chat_service.py
+│   │   │   └── document_service.py
+│   │   │
+│   │   └── config.py
+│   │
+│   ├── requirements.txt
+│   └── .env
+│
+├── data/
+│   ├── raw/
+│   │   ├── courses.csv
+│   │   └── university_document.docx
+│   │
+│   ├── processed/
+│   └── chroma_db/
+│
+├── scripts/
+│   ├── ingest_data.py
+│   ├── build_vector_db.py
+│   └── test_retrieval.py
+│
+├── tests/
+│   ├── test_rag.py
+│   ├── test_api.py
+│   └── test_chat.py
+│
+├── docs/
+│   ├── architecture.md
+│   ├── api.md
+│   └── project_notes.md
+│
+├── screenshots/
+│
+├── .gitignore
+├── README.md
+└── docker-compose.yml
+
+============================================================
+18. TECHNOLOGY STACK
+============================================================
+
+Frontend:
+React.js
+Tailwind CSS
+JavaScript
+
+Backend:
+Python
+FastAPI
+
+RAG:
+LangChain
+ChromaDB
+
+LLM:
+Ollama
+Llama
+
+Embeddings:
+Hugging Face embedding model or equivalent
+
+Application Database:
+SQLite
+
+API Testing:
+Postman
+
+Version Control:
+Git
+GitHub
+
+Development:
+Antigravity / AI-assisted development environment
+
+Future Deployment:
+Frontend hosting + backend hosting + production vector
+database as required.
+
+============================================================
+21. TESTING REQUIREMENTS
+============================================================
+
+The system should be tested with at least 50 meaningful
+questions covering different categories.
+
+Test categories:
+
+1. Course queries
+2. Eligibility queries
+3. Fee queries
+4. Admission queries
+5. Duration queries
+6. University information
+7. Multi-part questions
+8. Natural-language questions
+9. Unsupported questions
+10. Questions with no answer in the knowledge base
+
+Example:
+
+Question:
+"What courses are available?"
+
+Expected:
+Retrieve relevant course information and provide an answer.
+
+Question:
+"What is the eligibility for B.Tech AI and ML?"
+
+Expected:
+Retrieve the relevant course information and answer using
+the available context.
+
+Question:
+"What is the weather today?"
+
+Expected:
+The chatbot should identify that the question is outside its
+university counselling scope.
+
+Question:
+"Tell me something that is not present in the university
+documents."
+
+Expected:
+The chatbot should not fabricate an answer.
+
+============================================================
+22. SUCCESS CRITERIA
+============================================================
+
+The project will be considered successfully completed when:
+
+1. The chatbot frontend is functional.
+2. The floating popup chatbot works.
+3. Frontend communicates with FastAPI backend.
+4. CSV data is successfully processed.
+5. University document is successfully processed.
+6. Embeddings are generated successfully.
+7. ChromaDB stores the knowledge base.
+8. Relevant information is retrieved for user questions.
+9. LLM generates answers using retrieved context.
+10. Unsupported information is handled safely.
+11. The chatbot works with natural-language queries.
+12. The application has proper error handling.
+13. The project can run locally from documented instructions.
+14. The code is organized and maintainable.
+15. The project is available on GitHub.
+16. The system is ready for future university portal/widget
+    integration.
+
+============================================================
+24. IMPORTANT DESIGN PRINCIPLE
+============================================================
+
+The project should prioritize correctness and grounded
+responses over generating answers to every question.
+
+The chatbot must not pretend to know information that is not
+present in the approved knowledge base.
+
+The primary purpose of RAG is to connect the language model
+with university-specific information and reduce unsupported
+responses.
+
+============================================================
+25. FINAL PRODUCT VISION
+============================================================
+
+The final product should feel like a real university AI
+counselling assistant rather than a simple academic chatbot.
+
+Student
+   |
+   v
+University-style Website
+   |
+   v
+Floating AI Chatbot
+   |
+   v
+Natural Language Question
+   |
+   v
+FastAPI Backend
+   |
+   v
+RAG Retrieval
+   |
+   v
+University Knowledge Base
+   |
+   v
+LLM
+   |
+   v
+Grounded AI Response
+   |
+   v
+Student
+
+The architecture should remain modular so that the current
+demo application can later be integrated into the actual
+university portal without rebuilding the entire system.
+
+============================================================
+END OF PRD
+============================================================
