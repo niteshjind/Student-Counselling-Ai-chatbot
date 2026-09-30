@@ -1,4 +1,5 @@
 import sys
+import time
 from pathlib import Path
 from functools import lru_cache
 
@@ -563,6 +564,8 @@ def get_course_contact(question):
 
 def generate_answer(question: str):
 
+    total_start = time.perf_counter()
+
     question_lower = question.lower().strip()
 
 
@@ -583,7 +586,16 @@ def generate_answer(question: str):
     )
 
     if count_query:
-        return get_course_count()
+        answer = get_course_count()
+
+        total_time = time.perf_counter() - total_start
+
+        print(
+            f"⏱️ Direct response | "
+            f"Total: {total_time:.4f} sec"
+        )
+
+        return answer
 
 
     # --------------------------------------------------------
@@ -605,7 +617,16 @@ def generate_answer(question: str):
     )
 
     if all_seats_query:
-        return get_all_course_seats()
+        answer = get_all_course_seats()
+
+        total_time = time.perf_counter() - total_start
+
+        print(
+            f"⏱️ Direct response | "
+            f"Total: {total_time:.4f} sec"
+        )
+
+        return answer
 
 
     # --------------------------------------------------------
@@ -626,7 +647,16 @@ def generate_answer(question: str):
     )
 
     if general_admission_query:
-        return get_general_admission_information()
+        answer = get_general_admission_information()
+
+        total_time = time.perf_counter() - total_start
+
+        print(
+            f"⏱️ Direct response | "
+            f"Total: {total_time:.4f} sec"
+        )
+
+        return answer
 
 
     # --------------------------------------------------------
@@ -636,6 +666,14 @@ def generate_answer(question: str):
     unknown_course_response = check_unknown_course(question)
 
     if unknown_course_response:
+
+        total_time = time.perf_counter() - total_start
+
+        print(
+            f"⏱️ Direct response | "
+            f"Total: {total_time:.4f} sec"
+        )
+
         return unknown_course_response
 
 
@@ -657,7 +695,16 @@ def generate_answer(question: str):
     )
 
     if recommendation_query:
-        return get_course_comparison()
+        answer = get_course_comparison()
+
+        total_time = time.perf_counter() - total_start
+
+        print(
+            f"⏱️ Direct response | "
+            f"Total: {total_time:.4f} sec"
+        )
+
+        return answer
 
 
     # --------------------------------------------------------
@@ -679,7 +726,16 @@ def generate_answer(question: str):
     )
 
     if course_list_query:
-        return get_all_courses()
+        answer = get_all_courses()
+
+        total_time = time.perf_counter() - total_start
+
+        print(
+            f"⏱️ Direct response | "
+            f"Total: {total_time:.4f} sec"
+        )
+
+        return answer
 
 
     # --------------------------------------------------------
@@ -699,7 +755,16 @@ def generate_answer(question: str):
     )
 
     if duration_query:
-        return get_all_course_durations()
+        answer = get_all_course_durations()
+
+        total_time = time.perf_counter() - total_start
+
+        print(
+            f"⏱️ Direct response | "
+            f"Total: {total_time:.4f} sec"
+        )
+
+        return answer
 
 
     # --------------------------------------------------------
@@ -721,7 +786,16 @@ def generate_answer(question: str):
     )
 
     if fee_query:
-        return get_all_course_fees()
+        answer = get_all_course_fees()
+
+        total_time = time.perf_counter() - total_start
+
+        print(
+            f"⏱️ Direct response | "
+            f"Total: {total_time:.4f} sec"
+        )
+
+        return answer
 
 
     # --------------------------------------------------------
@@ -740,6 +814,14 @@ def generate_answer(question: str):
         answer = get_course_eligibility(question)
 
         if answer:
+
+            total_time = time.perf_counter() - total_start
+
+            print(
+                f"⏱️ Direct response | "
+                f"Total: {total_time:.4f} sec"
+            )
+
             return answer
 
 
@@ -758,6 +840,14 @@ def generate_answer(question: str):
         answer = get_course_fee(question)
 
         if answer:
+
+            total_time = time.perf_counter() - total_start
+
+            print(
+                f"⏱️ Direct response | "
+                f"Total: {total_time:.4f} sec"
+            )
+
             return answer
 
 
@@ -775,6 +865,14 @@ def generate_answer(question: str):
         answer = get_course_duration(question)
 
         if answer:
+
+            total_time = time.perf_counter() - total_start
+
+            print(
+                f"⏱️ Direct response | "
+                f"Total: {total_time:.4f} sec"
+            )
+
             return answer
 
 
@@ -793,6 +891,14 @@ def generate_answer(question: str):
         answer = get_course_admission(question)
 
         if answer:
+
+            total_time = time.perf_counter() - total_start
+
+            print(
+                f"⏱️ Direct response | "
+                f"Total: {total_time:.4f} sec"
+            )
+
             return answer
 
 
@@ -810,6 +916,14 @@ def generate_answer(question: str):
         answer = get_course_seats(question)
 
         if answer:
+
+            total_time = time.perf_counter() - total_start
+
+            print(
+                f"⏱️ Direct response | "
+                f"Total: {total_time:.4f} sec"
+            )
+
             return answer
 
 
@@ -828,6 +942,14 @@ def generate_answer(question: str):
         answer = get_course_hod(question)
 
         if answer:
+
+            total_time = time.perf_counter() - total_start
+
+            print(
+                f"⏱️ Direct response | "
+                f"Total: {total_time:.4f} sec"
+            )
+
             return answer
 
 
@@ -846,6 +968,14 @@ def generate_answer(question: str):
         answer = get_course_contact(question)
 
         if answer:
+
+            total_time = time.perf_counter() - total_start
+
+            print(
+                f"⏱️ Direct response | "
+                f"Total: {total_time:.4f} sec"
+            )
+
             return answer
 
 
@@ -870,6 +1000,14 @@ def generate_answer(question: str):
         answer = get_course_overview(question)
 
         if answer:
+
+            total_time = time.perf_counter() - total_start
+
+            print(
+                f"⏱️ Direct response | "
+                f"Total: {total_time:.4f} sec"
+            )
+
             return answer
 
 
@@ -888,6 +1026,13 @@ def generate_answer(question: str):
         ]
     )
 
+
+    # --------------------------------------------------------
+    # 18. RETRIEVER CREATION
+    # --------------------------------------------------------
+
+    retriever_start = time.perf_counter()
+
     if broad_question:
 
         retriever = get_retriever(k=18)
@@ -896,12 +1041,27 @@ def generate_answer(question: str):
 
         retriever = get_retriever(k=3)
 
+    retriever_create_time = (
+        time.perf_counter() - retriever_start
+    )
+
+    print(
+        f"⏱️ Retriever Creation: "
+        f"{retriever_create_time:.4f} sec"
+    )
+
 
     # --------------------------------------------------------
-    # 18. RETRIEVE CONTEXT
+    # 19. RETRIEVE CONTEXT
     # --------------------------------------------------------
+
+    retrieval_start = time.perf_counter()
 
     results = retriever.invoke(question)
+
+    retrieval_time = (
+        time.perf_counter() - retrieval_start
+    )
 
     context = [
         result.page_content
@@ -910,20 +1070,64 @@ def generate_answer(question: str):
 
 
     # --------------------------------------------------------
-    # 19. BUILD PROMPT
+    # 20. BUILD PROMPT
     # --------------------------------------------------------
+
+    prompt_start = time.perf_counter()
 
     prompt = build_prompt(
         question,
         context
     )
 
+    prompt_time = (
+        time.perf_counter() - prompt_start
+    )
+
 
     # --------------------------------------------------------
-    # 20. LLM RESPONSE
+    # 21. LLM RESPONSE
     # --------------------------------------------------------
+
+    llm_start = time.perf_counter()
 
     response = llm.invoke(prompt)
+
+    llm_time = (
+        time.perf_counter() - llm_start
+    )
+
+
+    # --------------------------------------------------------
+    # PERFORMANCE BREAKDOWN
+    # --------------------------------------------------------
+
+    total_time = time.perf_counter() - total_start
+
+    print("\n" + "=" * 60)
+    print("⏱️ PERFORMANCE BREAKDOWN")
+    print("=" * 60)
+    print(
+        f"🔧 Retriever Creation: "
+        f"{retriever_create_time:.4f} sec"
+    )
+    print(
+        f"🔎 Retrieval:          "
+        f"{retrieval_time:.4f} sec"
+    )
+    print(
+        f"📝 Prompt Build:       "
+        f"{prompt_time:.4f} sec"
+    )
+    print(
+        f"🤖 LLM:                "
+        f"{llm_time:.4f} sec"
+    )
+    print(
+        f"⏱️ Total:              "
+        f"{total_time:.4f} sec"
+    )
+    print("=" * 60)
 
     return response.content
 
